@@ -12,10 +12,12 @@
   "keywords": [],
   "author": "",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.8",
     "autoprefixer": "^10.4.20",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "postcss": "^8.5.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
