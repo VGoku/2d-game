@@ -24,22 +24,23 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CharacterCreation from "./pages/CharacterCreation";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup"; // Changed from Register to Signup
-import Home from "./pages/Home"; // Import the Home component you already have
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} /> {/* Changed to match the component name */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/character-creation" element={<CharacterCreation />} />
-        <Route path="*" element={<Home />} /> {/* Fallback to Home page instead of NotFound */}
       </Routes>
     </Router>
   );
