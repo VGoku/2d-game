@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+  @apply bg-gothic-gradient min-h-screen text-white;
+}
+
+/* Custom scrollbar for the gothic theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-vampire-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blood rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-crimson;
+}
+
+/* Gothic input styles */
+input[type="range"] {
+  @apply appearance-none bg-gothic-purple/50 h-2 rounded-full;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none w-4 h-4 rounded-full bg-blood cursor-pointer hover:bg-crimson transition-colors;
+} 

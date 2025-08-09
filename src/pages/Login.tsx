@@ -54,50 +54,98 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(""); // Clear error when user types
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    login(formData.username); // Simulate login
-    navigate("/dashboard"); // Redirect to dashboard
+    try {
+      if (!formData.username || !formData.password) {
+        setError("Please fill in all fields");
+        return;
+      }
+      await login(formData.username); // You might want to pass password too when implementing real auth
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Login failed. Please try again.");
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h2 className="text-2xl font-bold">Login</h2>
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg">
-        <label className="block mb-2">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="block w-full p-2 rounded bg-gray-700 text-white"
-            required
-          />
-        </label>
-        <label className="block mb-2">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="block w-full p-2 rounded bg-gray-700 text-white"
-            required
-          />
-        </label>
-        <button type="submit" className="bg-red-600 p-2 rounded mt-4 w-full">
-          Login
-        </button>
-      </form>
-      <button onClick={() => navigate("/register")} className="mt-4 text-blue-400">
-        Don't have an account? Sign up
-      </button>
+    <div className="min-h-screen bg-gothic-gradient flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <h2 className="text-4xl font-bold text-crimson mb-8 text-center font-serif">
+          Enter the Darkness
+        </h2>
+        
+        <form onSubmit={handleSubmit} className="bg-vampire-black/80 p-8 rounded-lg shadow-gothic backdrop-blur-sm">
+          {error && (
+            <div className="mb-4 p-3 bg-blood/20 border border-blood text-crimson rounded">
+              {error}
+            </div>
+          )}
+          
+          <div className="space-y-6">
+            <div>
+              <label className="block text-gray-300 mb-2 font-serif" htmlFor="username">
+                Username
+              </label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="w-full p-3 rounded bg-gothic-purple/50 border border-gray-700 text-white 
+                         focus:ring-2 focus:ring-crimson focus:border-transparent transition-all
+                         placeholder-gray-500"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-gray-300 mb-2 font-serif" htmlFor="password">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full p-3 rounded bg-gothic-purple/50 border border-gray-700 text-white 
+                         focus:ring-2 focus:ring-crimson focus:border-transparent transition-all
+                         placeholder-gray-500"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blood hover:bg-crimson text-white font-bold py-3 px-4 rounded
+                       transform transition-all duration-200 hover:scale-105 focus:outline-none
+                       focus:ring-2 focus:ring-crimson focus:ring-opacity-50 shadow-gothic"
+            >
+              Enter
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => navigate("/register")}
+            className="text-gray-400 hover:text-crimson transition-colors duration-200 font-serif"
+          >
+            New to the Darkness? Join Us
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
